@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { RiddleService } from './riddle.service';
 import { CreateRiddleDto } from './dto/create-riddle.dto';
 import { Riddle } from './riddle.schema';
@@ -38,7 +38,7 @@ export class RiddleController {
     return this.riddleService.updateRiddleById(id, updateData);
   }
 
-  @Post('delete/:id')
+  @Delete('delete/:id')
   async deleteRiddleById(@Param('id') id: string): Promise<Riddle | null> {
     return this.riddleService.deleteRiddleById(id);
   }

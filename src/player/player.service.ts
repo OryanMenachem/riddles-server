@@ -34,4 +34,18 @@ export class PlayerService {
 
     return data;
   }
+  async findTopTen(): Promise<Array<{ name: any; best_time: any }> | null> {
+    const supabase = this.supabaseService.getClient();
+    const { data: topTen, error } = await supabase
+      .from(this.TABLE_NAME)
+      .select('name, best_time')
+      .order('best_time', { ascending: false })
+      .limit(10);
+
+    if (error) {
+      throw new Error(`Failed to fetch top players: ${error.message}`);
+    }
+
+    return topTen;
+  }
 }
